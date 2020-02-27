@@ -4,16 +4,11 @@ const db = require("../models/userModel");
 const roomsController = {};
 
 roomsController.addRooms = (req, res, next) => {
-<<<<<<< HEAD
-  console.log('REQUEST BODY: ', req.body);
+  console.log("REQUEST BODY: ", req.body);
   const {
     name,
     admin
   } = req.body;
-=======
-  console.log("REQUEST BODY: ", req.body);
-  const { name, admin } = req.body;
->>>>>>> d378fe404f184a1beb85708ef63326d14b1083b0
   const addRoom = {
     text: `
       INSERT INTO rooms
