@@ -59,6 +59,32 @@ userController.getAllRooms = (req, res, next) => {
     })
 }
 
+userController.getProfile = (req, res, next) => {
+  const {
+    mentor_id
+  } = req.params;
+  const getProfile = {
+    text: 'SELECT feedback, snaps_given FROM tickets WHERE mentor_id = $1',
+    values: [mentor_id]
+  }
+  db.query(getProfile)
+    .then((profileData) => {
+      console.log(profileData)
+      // FIGURE OUT THE SOMETHING
+      res.locals.profileData = profileData.rows
+      return next();
+    })
+    .catch(err => {
+      return next({
+        log: "Error occured in userController.getProfile",
+        status: 400,
+        message: {
+          err: err
+        }
+      });
+    });
+}
+
 userController.getActiveRoom = (req, res, next) => {
   const {
     userId
