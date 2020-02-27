@@ -34,4 +34,26 @@ roomsController.addRooms = (req, res, next) => {
     );
 };
 
+roomsController.joinRoom = (req, res, next) => {
+  const {
+    user_id,
+    room_name
+  } = req.body
+  const joinRoom = {
+    text: 'INSERT INTO rooms_users VALUES $1, $2, false',
+    values: [user_id, room_name]
+  }
+  db.query(joinRoom)
+    .then((joinedRoomData) => {
+      console.log(joinedRoomData);
+      // FIGURE OUT THE SOMETHING
+      res.locals.joinedRoomData = joinedRoomData.something;
+      return next();
+    })
+    .catch((err) => {
+      console.log(err)
+      return next();
+    })
+};
+
 module.exports = roomsController;

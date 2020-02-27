@@ -49,6 +49,10 @@ apiRouter.get('/rooms/:userId', jwtsController.isLoggedIn, roomsController.getRo
   res.status(200).json()
 );
 
+apiRouter.post('/rooms/joinRoom', jwtsController.isLoggedIn, roomsController.updateActiveRoom, roomsController.joinRoom, (req, res) =>
+  res.status(200).json(res.locals)
+)
+
 // apiRouter.get('/', jwtsController.isLoggedIn, adminController.getBannedList, (req, res) => {
 //   res.status(200).json(res.locals)
 // })
